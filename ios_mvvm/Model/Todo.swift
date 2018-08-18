@@ -7,10 +7,24 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Todo {
-    let userId: String = ""
-    let id: Int = 0
-    let title: String = ""
-    let completed: Bool = false
+struct Todo : Mappable {
+    
+    var userId: String?
+    var id: Int?
+    var title: String?
+    var completed: Bool?
+    
+    init?(map: Map) {
+    
+    }
+    
+    mutating func mapping(map: Map) {
+        userId <- map["userId"]
+        id <- map["id"]
+        title <- map["title"]
+        completed <- map["completed"]
+    }
+    
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 class UserRepository: Repository {
     
@@ -30,7 +31,10 @@ class UserRepository: Repository {
                 
                 break
             case .Success(let data):
-                print(data)
+                
+                // Map via ObjectMapper
+                let todo = Mapper<Todo>().mapArray(JSONArray: data as! [[String : Any]])
+                print(todo)
                 break
             case .Warning(let error):
                 print(error)
