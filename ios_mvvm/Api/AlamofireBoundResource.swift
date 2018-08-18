@@ -16,6 +16,7 @@ class AlamofireBoundResource<RequestType> {
         Alamofire.request(requestRouter).responseJSON { (response) in
             switch response.result {
             case .success(let value):
+                
                 callback(Result<RequestType, ApiError>.Success(value as! RequestType))
             case .failure(let error):
                 

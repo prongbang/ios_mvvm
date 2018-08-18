@@ -33,8 +33,26 @@ class UserRepository: Repository {
             case .Success(let data):
                 
                 // Map via ObjectMapper
-                let todo = Mapper<Todo>().mapArray(JSONArray: data as! [[String : Any]])
-                print(todo)
+                let todo:[Todo] = Mapper<Todo>().mapArray(JSONArray: data as! [[String : Any]])
+                
+                //to get JSON return value
+                guard let responseJSON = data as? Array<[String: AnyObject]> else {
+                    print("Error reading response")
+                    return
+                }
+                guard let value:[Todo] = Mapper<Todo>().mapArray(JSONArray: responseJSON) else {
+                    print("Error mapping response")
+                    return
+                }
+                
+                for t in todo {
+                    print("userId: \(String(describing: t.userId))")
+                    print("id: \(String(describing: t.id))")
+                    print("title: \(String(describing: t.title))")
+                    print("completed: \(String(describing: t.completed))")
+                    print("-----")
+                }
+                
                 break
             case .Warning(let error):
                 print(error)

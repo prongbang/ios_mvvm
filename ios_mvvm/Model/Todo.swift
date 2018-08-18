@@ -11,10 +11,10 @@ import ObjectMapper
 
 struct Todo : Mappable {
     
-    var userId: String?
-    var id: Int?
-    var title: String?
-    var completed: Bool?
+    var userId: Int? = 0
+    var id: Int? = 0
+    var title: String? = ""
+    var completed: Bool? = false
     
     init?(map: Map) {
     
